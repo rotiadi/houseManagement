@@ -63,8 +63,10 @@ app.use((req, res, next) => {
 });
 
 app.use((err, req, res, next) => {
+  const error = err;
+  // TODO: Handle error
   if (err) {
-    const formattedError = formatMongoError(err);
+    /* const formattedError = formatMongoError(err);
     if (!formattedError) {
       res.status(500).json({
         statusCode: 500,
@@ -72,7 +74,12 @@ app.use((err, req, res, next) => {
       });
     } else {
       res.status(500).json(formattedError);
-    }
+    } */
+
+    res.status(500).json({
+      statusCode: 500,
+      message: error,
+    });
   } else {
     next();
   }
